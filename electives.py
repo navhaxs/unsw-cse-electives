@@ -2,7 +2,7 @@
 from lxml import html
 import requests
 
-page = requests.get("http://www.handbook.unsw.edu.au/vbook2017/brCoursesBySubjectArea.jsp?studyArea=COMP&StudyLevel=Undergraduate")
+page = requests.get("http://www.handbook.unsw.edu.au/vbook2018/brCoursesBySubjectArea.jsp?studyArea=COMP&StudyLevel=Undergraduate")
 tree = html.fromstring(page.content)
 
 # with open("raw.html","r") as in_file:
@@ -28,7 +28,7 @@ for row in table:
 
         j = j + 1
 
-        timetable_url = requests.get("http://timetable.unsw.edu.au/2017/" + course_code + ".html")
+        timetable_url = requests.get("http://timetable.unsw.edu.au/2018/" + course_code + ".html")
 
         subtree = html.fromstring(timetable_url.content)
 
@@ -43,15 +43,15 @@ for row in table:
             if (len(e) > 0):
                 s2_offered.append([course_code, course_title])
 
-print("\n### Offered 2017s1:")
+print("\n### Offered 2018s1:")
 for i in s1_offered:
-    print('[{0}](http://timetable.unsw.edu.au/2017/{0}.html) [{1}](http://www.handbook.unsw.edu.au/undergraduate/courses/2017/{0}.html)\n'.format(i[0], i[1]))
+    print('[{0}](http://timetable.unsw.edu.au/2018/{0}.html) [{1}](http://www.handbook.unsw.edu.au/undergraduate/courses/2018/{0}.html)\n'.format(i[0], i[1]))
 
-print("\n### Offered 2017s2:")
+print("\n### Offered 2018s2:")
 for i in s2_offered:
-    print('[{0}](http://timetable.unsw.edu.au/2017/{0}.html) [{1}](http://www.handbook.unsw.edu.au/undergraduate/courses/2017/{0}.html)\n'.format(i[0], i[1]))
+    print('[{0}](http://timetable.unsw.edu.au/2018/{0}.html) [{1}](http://www.handbook.unsw.edu.au/undergraduate/courses/2018/{0}.html)\n'.format(i[0], i[1]))
 
 print("\n### Not running :(")
 for i in not_offered:
-    print('[{0}](http://timetable.unsw.edu.au/2017/{0}.html) [{1}](http://www.handbook.unsw.edu.au/undergraduate/courses/2017/{0}.html)\n'.format(i[0], i[1]))
+    print('[{0}](http://timetable.unsw.edu.au/2018/{0}.html) [{1}](http://www.handbook.unsw.edu.au/undergraduate/courses/2018/{0}.html)\n'.format(i[0], i[1]))
 
